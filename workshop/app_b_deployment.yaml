@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-b-deployment
+spec:
+  selector:
+    matchLabels:
+      app: myapp-b
+  template:
+    metadata:
+      labels:
+        app: myapp-b
+    spec:
+      containers:
+      - name: myapp-b
+        image: dvago88/service_b:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9595

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-b-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-b
+  template:
+    metadata:
+      labels:
+        app: app-b
+    spec:
+      containers:
+      - name: api-service
+        image: dvago88/service_b:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9090
+        env:
+          - name: SERVER_PORT
+            value: "9090"
