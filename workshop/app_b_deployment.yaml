@@ -15,7 +15,17 @@ spec:
       - name: app-b
         image: dvago88/service_b:latest
         env:
-          - name: serviceb.url
-            value: "http://service-b:9090"
+          - name: spring.datasource.url
+            value: "jdbc:mysql://mysql:3306/spring_boot_db"
+          - name: spring.datasource.username
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: username
+          - name: spring.datasource.password
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: password
         ports:
-        - containerPort: 9090
+        - containerPort: 9090 # This should match the port on which Service B is running
