@@ -1,22 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-b-deployment
+  name: app-b-deployment
 spec:
   selector:
     matchLabels:
-      app: myapp-b
+      app: app-b
   template:
     metadata:
       labels:
-        app: myapp-b
+        app: app-b
     spec:
       containers:
-      - name: myapp-b
+      - name: app-b
         image: dvago88/service_b:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        env:
+          - name: serviceb.url
+            value: "http://service-b:9090"
         ports:
-        - containerPort: 9595
+        - containerPort: 9090
